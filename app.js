@@ -1,15 +1,15 @@
 const express = require('express')
 const app = express()
+const clienteRouter = require('./src/routes/clienteRoutes')
 
-const database = require('./config/db')
- 
-database
-    .authenticate()
-    .then(() =>{
-        console.log("Banco de dados conectado com sucesso")
-    }).catch((msgErro) =>{
-        console.log(msgErro)
-    })
+app.use(express.json());
+
+app.use('/clientes', clienteRouter);
+
+app.use((err, req, res, next)=> {
+    console.error(err.stack);
+    res.status(500).send('Algo deu errado!');
+});
 
 
 module.exports = app
