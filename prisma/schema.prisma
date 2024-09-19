@@ -22,15 +22,15 @@ model Cardapio {
 }
 
 model Estabelecimento {
-  id                   Int        @id @default(autoincrement())
+  id                   Int                 @id @default(autoincrement())
   nome                 String
-  cnpj                 Int        @unique
-  email                String     @unique
-  senha                String     @unique
-  telefone             Int
+  cnpj                 String                 @unique
+  email                String              @unique
+  senha                String              @unique
+  telefone             String
   endereco             String
-  horario              Int
-  tipo_estabelecimento String
+  horario              String
+  tipo_estabelecimento TipoEstabelecimento
   Cardapio             Cardapio[]
   Mesa                 Mesa[]
   Pedidos              Pedido[]
@@ -107,7 +107,7 @@ model Cliente {
   senha                String              @unique
   telefone             String
   endereco             String
-  data_criacao         Int
+  data_criacao         DateTime            @default(now())
   status               String
   estabelecimento      Estabelecimento     @relation(fields: [idEstabelecimento], references: [id])
   idEstabelecimento    Int
