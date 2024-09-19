@@ -1,18 +1,18 @@
 const{PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 
-exports.getAllCliente = async (req, res) => {
+exports.getAllCardapio = async (req, res) => {
     try {
-        const cliente = await prisma.cliente.findMany()
-        res.json(cliente);
+        const cardapio = await prisma.cardapio.findMany()
+        res.json(cardapio);
     }catch(error) {
         res.status(500).json({error: error.message});
     }
 };
 
-exports.createCliente = async (req, res) => {
+exports.createCardapio = async (req, res) => {
     try{
-        const cliente = await prisma.cliente.create({
+        const cardapio = await prisma.cardapio.create({
             data: req.body
         });
         res.status(201).json(cliente);
@@ -21,43 +21,43 @@ exports.createCliente = async (req, res) => {
     }
 };
 
-exports.getClienteById = async (req, res) => {
+exports.getCardapioById = async (req, res) => {
     try {
       const { id } = req.params;
-      const cliente = await prisma.cliente.findUnique({
+      const cardapio = await prisma.cardapio.findUnique({
         where: { id: Number(id) },
     
       });
-      if (cliente) {
-        res.json(cliente);
+      if (cardapio) {
+        res.json(cardapio);
       } else {
-        res.status(404).json({ error: 'Cliente não encontrado' });
+        res.status(404).json({ error: 'Cardápio não encontrado' });
       }
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   };
 
-exports.updateCliente = async (req, res) => {
+exports.updateCardapio = async (req, res) => {
     try{
         const { id } = req.params;
-        const cliente = await prisma.cliente.update({
+        const cardapio = await prisma.cardapio.update({
             where: { id: Number(id) },
         });
-        res.status(404).json(cliente);
+        res.status(404).json(cardapio);
     }catch(error){
         res.status(500).json({error: error.message});
     }
 };
 
-exports.deleteCliente = async (req, res) => {
+exports.deleteCardapio = async (req, res) => {
   try{
       const { id } = req.params;
     
-      await prisma.cliente.delete({
+      await prisma.cardapio.delete({
           where: { id: Number(id) },
       });
-      res.status(200).json({menssage: "Cliente excluído com sucesso!"});
+      res.status(200).json({menssage: "Cardapio excluído com sucesso!"});
   }catch(error){
       res.status(500).json({error: error.message});
   }

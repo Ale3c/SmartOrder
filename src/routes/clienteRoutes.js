@@ -10,4 +10,7 @@ router.get('/:id', clienteController.getClienteById);
 
 router.put('/:id', clienteController.updateCliente);
 
+router.delete('/:id', clienteController.deleteCliente);
+
+
 module.exports = router;
