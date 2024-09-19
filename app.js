@@ -3,6 +3,7 @@ const app = express()
 const clienteRouter = require('./src/routes/clienteRoutes')
 const estabelecimentoRouter = require('./src/routes/estabelecimentoRoutes')
 const cardapioRouter = require('./src/routes/cardapioRoutes')
+const pedidoRouter = require('./src/routes/pedidoRoutes')
 
 
 app.use(express.json());
@@ -12,6 +13,8 @@ app.use('/clientes', clienteRouter);
 app.use('/estabelecimento', estabelecimentoRouter);
 
 app.use('/cardapio', cardapioRouter);
+
+app.use('/pedipo', pedidoRouter);
 
 app.use((err, req, res, next)=> {
     console.error(err.stack);
