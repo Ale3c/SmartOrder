@@ -1,63 +1,63 @@
 const{PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 
-exports.getAllPedido = async (req, res) => {
+exports.getAllMesa = async (req, res) => {
     try {
-        const pedido = await prisma.pedido.findMany()
-        res.json(pedido);
+        const mesa = await prisma.mesa.findMany()
+        res.json(mesa);
     }catch(error) {
         res.status(500).json({error: error.message});
     }
 };
 
-exports.createPedido = async (req, res) => {
+exports.createMesa = async (req, res) => {
     try{
-        const pedido = await prisma.pedido.create({
+        const mesa = await prisma.mesa.create({
             data: req.body
         });
-        res.status(201).json(pedido);
+        res.status(201).json(mesa);
     }catch(error){
         res.status(400).json({error: error.message});
     }
 };
 
-exports.getPedidoById = async (req, res) => {
+exports.getMesaById = async (req, res) => {
     try {
       const { id } = req.params;
-      const pedido = await prisma.pedido.findUnique({
+      const mesa = await prisma.mesa.findUnique({
         where: { id: Number(id) },
     
       });
-      if (pedido) {
-        res.json(pedido);
+      if (mesa) {
+        res.json(mesa);
       } else {
-        res.status(200).json({ error: 'Pedido não encontrado' });
+        res.status(200).json({ error: 'Mesa não encontrada' });
       }
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   };
 
-exports.updatePedido = async (req, res) => {
+  exports.updateMesa = async (req, res) => {
     try{
         const { id } = req.params;
-        const pedido = await prisma.pedido.update({
+        const mesa = await prisma.mesa.update({
             where: { id: Number(id) },
         });
-        res.status(200).json(pedido);
+        res.status(200).json(mesa);
     }catch(error){
         res.status(500).json({error: error.message});
     }
 };
 
-exports.deletePedido = async (req, res) => {
+exports.deleteMesa = async (req, res) => {
   try{
       const { id } = req.params;
     
-      await prisma.pedido.delete({
+      await prisma.mesa.delete({
           where: { id: Number(id) },
       });
-      res.status(200).json({menssage: "Pedido excluído com sucesso!"});
+      res.status(200).json({menssage: "Mesa excluída com sucesso!"});
   }catch(error){
       res.status(500).json({error: error.message});
   }
